@@ -1,0 +1,68 @@
+pipeline {
+    agent any
+    tools {
+        maven 'maven'
+    }
+
+    environment {
+        ARTIFACTORY_SERVER = 'server-1'
+        ARTIFACTORY_URL = 'http://20.235.151.127:8081/artifactory'
+        ARTIFACTORY_CREDENTIALS = 'jfrog-connection'
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Rahul-training/Devops.git']])
+            }
+        }
+
+        stage('Compile Sample Application') {
+            steps {
+                dir('addressbook/addressbook_main') {
+                    sh 'mvn compile'
+                }
+            }
+        }
+
+        stage('Test Sample Application') {
+            steps {
+                dir('addressbook/addressbook_main') {
+                    sh 'mvn test'
+                }
+            }
+        }
+
+        stage('Package Sample Application') {
+            steps {
+                dir('addressbook/addressbook_main') {
+                    sh 'mvn package'
+                }
+            }
+        }
+
+        stage('Upload to JFrog Artifactory') {
+            steps {
+                script {
+                    rtServer (
+                        id: jfrog,
+                        url: ARTIFACTORY_URL,
+                        credentialsId: ARTIFACTORY_CREDENTIALS
+                    )
+
+                    rtUpload (
+                        serverId: ARTIFACTORY_SERVER,
+                        spec: '''{
+                            "files": [
+                                {
+                                    "pattern": "addressbook/addressbook_main/target/addressbook.war",
+                                    "target": "libs-snapshot-local/"
+                                }
+                            ]
+                        }'''
+                    )
+                }
+            }
+        }
+    }
+}
