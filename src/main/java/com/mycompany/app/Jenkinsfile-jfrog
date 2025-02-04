@@ -12,8 +12,20 @@ pipeline {
         }
      stage('Install Maven Build Tool') {
             steps { 
-                sh 'wget https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz'
-                sh 'tar -xzvf /tmp/workspace/test/apache-maven-3.9.4-bin.tar.gz'
+                sh '''
+        # Install wget if not installed (without sudo)
+        if ! command -v wget &> /dev/null
+        then
+            echo "wget not found. Installing..."
+            apt-get update && apt-get install -y wget || yum install -y wget
+        else
+            echo "wget is already installed."
+        fi
+
+        # Download and extract Maven
+        wget https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz
+        tar -xzvf apache-maven-3.9.4-bin.tar.gz -C /var/lib/jenkins/workspace/test/
+        '''
              } 
            }
      stage('Compile Sample Application') {
