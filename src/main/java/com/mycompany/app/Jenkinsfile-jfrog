@@ -1,5 +1,5 @@
 pipeline {
-    agent 
+    agent any
 
     stages {
         stage('Checkout code') {
@@ -21,47 +21,38 @@ pipeline {
 
         # Download and extract Maven
         wget https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz
-        tar -xzvf apache-maven-3.9.4-bin.tar.gz -C /tmp/workspace/test/
+        tar -xzvf apache-maven-3.9.4-bin.tar.gz -C /var/lib/jenkins/workspace/test/
         '''
              } 
            }
      stage('Compile Sample Application') {
             steps {
-                dir('/tmp/workspace/test/addressbook/addressbook_main'){
-                sh '/tmp/workspace/test/apache-maven-3.9.4/bin/mvn compile'
+                dir('/var/lib/jenkins/workspace/test/addressbook/addressbook_main'){
+                sh '/var/lib/jenkins/workspace/test/apache-maven-3.9.4/bin/mvn compile'
             }
            }
         }
     stage('Test Sample Application') {
             steps {
-                dir('/tmp/workspace/test/addressbook/addressbook_main'){
-                sh '/tmp/workspace/test/apache-maven-3.9.4/bin/mvn test'
+                dir('/var/lib/jenkins/workspace/test/addressbook/addressbook_main'){
+                sh '/var/lib/jenkins/workspace/test/apache-maven-3.9.4/bin/mvn test'
             }
            }
         }
      stage('Package Sample Application') {
             steps {
-                dir('/tmp/workspace/test/addressbook/addressbook_main'){
-                sh '/tmp/workspace/test/apache-maven-3.9.4/bin/mvn package'
+                dir('/var/lib/jenkins/workspace/test/addressbook/addressbook_main'){
+                sh '/var/lib/jenkins/workspace/test/apache-maven-3.9.4/bin/mvn package'
             }
            }
         }
      stage('Upload Jfrog Artifact') {
             steps {
-                dir('/tmp/workspace/test/addressbook/addressbook_main/target'){
+                dir('/var/lib/jenkins/workspace/test/addressbook/addressbook_main/target'){
                 rtServer (
     id: 'server-1',
     url: 'http://20.235.151.127:8081/artifactory',
-        // If you're using username and password:
-    //username: 'admin',
-    //password: 'password',
-        // If you're using Credentials ID:
         credentialsId: 'jfrog-connection',
-        // If Jenkins is configured to use an http proxy, you can bypass the proxy when using this Artifactory server:
-        bypassProxy: true,
-        // Configure the connection timeout (in seconds).
-        // The default value (if not configured) is 300 seconds: 
-        timeout: 300
 )    
                 rtUpload (
     serverId: 'server-1',
@@ -77,23 +68,6 @@ pipeline {
     }
      } 
     }
-stage('Download Jfrog Artifact') {
-            steps {
-                dir('/tmp'){
-rtDownload (
-    serverId: 'server-1',
-    spec: '''{
-          "files": [
-            {
-              "pattern": "libs-snapshot-local/",
-              "target": ""
-            }
-          ]
-    }''',
-)
-}
-}
-}
       
     }
 }
