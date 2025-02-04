@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    tools{
+        jdk 'java'
+        maven 'maven'
+    }
 
     stages {
         stage('Checkout code') {
@@ -7,24 +11,6 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Rahul-training/Devops.git']])
             }
         }
-     stage('Install Maven Build Tool') {
-            steps { 
-                sh '''
-        # Install wget if not already installed
-        if ! command -v wget &> /dev/null
-        then
-            echo "wget not found. Installing..."
-            sudo apt-get update && sudo apt-get install -y wget || sudo yum install -y wget
-        else
-            echo "wget is already installed."
-        fi
-
-        # Download and extract Maven
-        wget https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz
-        tar -xzvf apache-maven-3.9.4-bin.tar.gz -C /var/lib/jenkins/workspace/test/
-        '''
-             } 
-           }
      stage('Compile Sample Application') {
             steps {
                 dir('/var/lib/jenkins/workspace/test/addressbook/addressbook_main'){
