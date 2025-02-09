@@ -1,0 +1,154 @@
+{
+  "dashboard": {
+    "id": null,
+    "uid": "ec2-full-monitoring",
+    "title": "EC2 Full Monitoring",
+    "tags": ["AWS", "EC2", "CloudWatch"],
+    "timezone": "browser",
+    "schemaVersion": 16,
+    "version": 1,
+    "refresh": "30s",
+    "panels": [
+      {
+        "type": "graph",
+        "title": "CPU Utilization",
+        "gridPos": {"x": 0, "y": 0, "w": 12, "h": 8},
+        "targets": [
+          {
+            "expr": "aws_ec2_cpuutilization_average",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "xaxis": {"mode": "time", "show": true},
+        "yaxis": {"format": "percent", "logBase": 1, "max": "100", "min": "0", "show": true},
+        "lines": true,
+        "linewidth": 2,
+        "fill": 1,
+        "fillGradient": 0,
+        "dashes": false,
+        "spaceLength": 10,
+        "pointradius": 2,
+        "steppedLine": false,
+        "tooltip": {"shared": true, "sort": 0, "value_type": "individual"}
+      },
+      {
+        "type": "graph",
+        "title": "Memory Usage",
+        "gridPos": {"x": 0, "y": 8, "w": 12, "h": 8},
+        "targets": [
+          {
+            "expr": "aws_ec2_memory_used_percent",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "xaxis": {"mode": "time", "show": true},
+        "yaxis": {"format": "percent", "logBase": 1, "max": "100", "min": "0", "show": true},
+        "lines": true,
+        "linewidth": 2,
+        "fill": 1,
+        "fillGradient": 0,
+        "dashes": false,
+        "spaceLength": 10,
+        "pointradius": 2,
+        "steppedLine": false,
+        "tooltip": {"shared": true, "sort": 0, "value_type": "individual"}
+      },
+      {
+        "type": "graph",
+        "title": "Disk Read Ops",
+        "gridPos": {"x": 0, "y": 16, "w": 12, "h": 8},
+        "targets": [
+          {
+            "expr": "aws_ec2_diskreadops_sum",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "xaxis": {"mode": "time", "show": true},
+        "yaxis": {"format": "ops", "logBase": 1, "show": true},
+        "lines": true,
+        "linewidth": 2,
+        "fill": 1,
+        "fillGradient": 0,
+        "dashes": false,
+        "spaceLength": 10,
+        "pointradius": 2,
+        "steppedLine": false,
+        "tooltip": {"shared": true, "sort": 0, "value_type": "individual"}
+      },
+      {
+        "type": "graph",
+        "title": "Disk Write Ops",
+        "gridPos": {"x": 0, "y": 24, "w": 12, "h": 8},
+        "targets": [
+          {
+            "expr": "aws_ec2_diskwriteops_sum",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "xaxis": {"mode": "time", "show": true},
+        "yaxis": {"format": "ops", "logBase": 1, "show": true},
+        "lines": true,
+        "linewidth": 2,
+        "fill": 1,
+        "fillGradient": 0,
+        "dashes": false,
+        "spaceLength": 10,
+        "pointradius": 2,
+        "steppedLine": false,
+        "tooltip": {"shared": true, "sort": 0, "value_type": "individual"}
+      },
+      {
+        "type": "graph",
+        "title": "Network In",
+        "gridPos": {"x": 0, "y": 32, "w": 12, "h": 8},
+        "targets": [
+          {
+            "expr": "aws_ec2_networkin_sum",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "xaxis": {"mode": "time", "show": true},
+        "yaxis": {"format": "bytes", "logBase": 1, "show": true},
+        "lines": true,
+        "linewidth": 2,
+        "fill": 1,
+        "fillGradient": 0,
+        "dashes": false,
+        "spaceLength": 10,
+        "pointradius": 2,
+        "steppedLine": false,
+        "tooltip": {"shared": true, "sort": 0, "value_type": "individual"}
+      },
+      {
+        "type": "graph",
+        "title": "Network Out",
+        "gridPos": {"x": 0, "y": 40, "w": 12, "h": 8},
+        "targets": [
+          {
+            "expr": "aws_ec2_networkout_sum",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "xaxis": {"mode": "time", "show": true},
+        "yaxis": {"format": "bytes", "logBase": 1, "show": true},
+        "lines": true,
+        "linewidth": 2,
+        "fill": 1,
+        "fillGradient": 0,
+        "dashes": false,
+        "spaceLength": 10,
+        "pointradius": 2,
+        "steppedLine": false,
+        "tooltip": {"shared": true, "sort": 0, "value_type": "individual"}
+      }
+    ]
+  },
+  "folderId": 0,
+  "overwrite": false
+}
