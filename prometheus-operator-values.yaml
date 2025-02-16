@@ -409,12 +409,12 @@ alertmanager:
 
     ## Hosts must be provided if Ingress is enabled.
     ##
-    hosts: [testalerts.test.com]
+    hosts: [lucky1225.blog]
       # - alertmanager.domain.com
 
     ## Paths to use for ingress rules - one path should match the alertmanagerSpec.routePrefix
     ##
-    paths:
+    paths: 
     # - /
 
     ## For Kubernetes >= 1.18 you should specify the pathType (determines how Ingress paths should be matched)
@@ -767,7 +767,7 @@ alertmanager:
           resources:
             requests:
               storage: 50Gi
-    #     selector: {}
+#         selector: {}
 
 
     ## The external URL the Alertmanager instances will be available under. This is necessary to generate correct URLs. This is necessary if Alertmanager is not served from root of a DNS name. string  false
@@ -777,7 +777,7 @@ alertmanager:
     ## The route prefix Alertmanager registers HTTP handlers for. This is useful, if using ExternalURL and a proxy is rewriting HTTP routes of a request, and the actual ExternalURL is still true,
     ## but the server serves requests under a different route prefix. For example for use with kubectl proxy.
     ##
-    routePrefix: /
+    routePrefix: /alertmanager
 
     ## scheme: HTTP scheme to use. Can be used with `tlsConfig` for example if using istio mTLS.
     scheme: ""
@@ -953,6 +953,18 @@ alertmanager:
 ## Using default values from https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
 ##
 grafana:
+  # env:
+  #   GF_SECURITY_ADMIN_USER:
+  #     valueFrom:
+  #       secretKeyRef:
+  #         name: prometheus-grafana-lucky
+  #         key: admin-user
+  #   GF_SECURITY_ADMIN_PASSWORD:
+  #     valueFrom:
+  #       secretKeyRef:
+  #         name: prometheus-grafana-lucky
+  #         key: admin-password
+
   enabled: true
   namespaceOverride: ""
 
@@ -996,11 +1008,11 @@ grafana:
 
     ## Annotations for Grafana Ingress
     ##
-    # annotations:
-    #   nginx.ingress.kubernetes.io/rewrite-target: /$2
-    #   nginx.ingress.kubernetes.io/use-regex: "true"
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+    annotations: 
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
+      nginx.ingress.kubernetes.io/use-regex: "true"
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
 
     ## Labels to be added to the Ingress
     ##
@@ -1011,10 +1023,10 @@ grafana:
     ##
     # hosts:
     #   - grafana.domain.com
-    hosts: [grafana.test.com]
+    hosts: [lucky1225.blog]
 
     ## Path for grafana ingress
-    path: 
+    path: /grafana(/|$)(.*)
 
     ## TLS configuration for grafana Ingress
     ## Secret must be manually created in the namespace
@@ -1039,6 +1051,8 @@ grafana:
   serviceAccount:
     create: true
     autoMount: true
+#    annotations:
+#      eks.amazonaws.com/role-arn: arn:aws:iam::202533510666:role/eksctl-test-eks-cluster-nodegroup--NodeInstanceRole-Pg7thWCE46ur
 
   sidecar:
     dashboards:
@@ -1126,26 +1140,26 @@ grafana:
         jsonData:
           authType: "assume_role"
           defaultRegion: "us-west-2"   
-          assumeRoleArn: "arn:aws:iam::123456789012:role/DummyRoleName"
+          assumeRoleArn: "arn:aws:iam::202533510666:role/eksctl-test-eks-cluster-nodegroup--NodeInstanceRole-Pg7thWCE46ur"
           customMetricsNamespaces: "CustomNamespace"
           # secureJsonData:
         #   accessKey: "YOUR_AWS_ACCESS_KEY"   # Optional, recommended to use IRSA instead
         #   secretKey: "YOUR_AWS_SECRET_KEY"   # Optional, recommended to use IRSA instead
-      - name: PostgreSQL
-        type: postgres
-        access: proxy
-        url: "mydatabase-instance.c1234567890.us-east-1.rds.amazonaws.com:5432" 
-        database: "sonardb"  
-        user: "postgres"          
-        secureJsonData:
-          passwordFromSecret:
-            name: postgres-secret  
-            key: password           
-        jsonData:
-          sslmode: "require"  
-          maxOpenConns: 5
-          maxIdleConns: 2
-          connMaxLifetime: 14400
+      # - name: PostgreSQL
+      #   type: postgres
+      #   access: proxy
+      #   url: "mydatabase-instance.c1234567890.us-east-1.rds.amazonaws.com:5432" 
+      #   database: "sonardb"  
+      #   user: "postgres"          
+      #   secureJsonData:
+      #     passwordFromSecret:
+      #       name: postgres-secret  
+      #       key: password           
+      #   jsonData:
+      #     sslmode: "require"  
+      #     maxOpenConns: 5
+      #     maxIdleConns: 2
+      #     connMaxLifetime: 14400
   # - name: prometheus-sample
   #   access: proxy
   #   basicAuth: true
@@ -1171,9 +1185,9 @@ grafana:
     ipFamilies: []
     ipFamilyPolicy: ""
 
-  # grafana.ini:
-  #   server:
-  #     root_url: http://localhost:3000/grafana
+  grafana.ini:
+    server:
+      root_url: http://localhost:3000/grafana
 
   serviceMonitor:
     # If true, a ServiceMonitor CRD is created for a prometheus operator
@@ -3303,11 +3317,11 @@ prometheus:
     ##
     # hosts:
     #   - prometheus.domain.com
-    hosts: [prometheus.test.com]
+    hosts: [lucky1225.blog]
 
     ## Paths to use for ingress rules - one path should match the prometheusSpec.routePrefix
     ##
-    paths: []
+    paths: 
     # - /
 
     ## For Kubernetes >= 1.18 you should specify the pathType (determines how Ingress paths should be matched)
@@ -3513,7 +3527,7 @@ prometheus:
 
     ## Exemplars related settings that are runtime reloadable.
     ## It requires to enable the exemplar storage feature to be effective.
-    exemplars: 
+    exemplars: ""
       ## Maximum number of exemplars stored in memory for all series.
       ## If not set, Prometheus uses its default value.
       ## A value of zero or less than zero disables the storage.
@@ -3593,7 +3607,7 @@ prometheus:
 
     ## External URL at which Prometheus will be reachable.
     ##https://github.com/kubernetes/ingress-nginx/issues/6140#issuecomment-2048229997    ---> pls check this why I have configured externalurl
-    #externalUrl: http://prometheus-kube-prometheus-prometheus.prometheus:9090/prometheus
+    externalUrl: http://prometheus-kube-prometheus-prometheus.prometheus:9090/prometheus
 
     ## Define which Nodes the Pods are scheduled on.
     ## ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -3732,7 +3746,7 @@ prometheus:
     #     prometheus: somelabel
 
     ## If nil, select own namespace. Namespaces to be selected for scrapeConfig discovery.
-    scrapeConfigNamespaceSelector: 
+    scrapeConfigNamespaceSelector: {}
     ## Example which selects scrapeConfig in namespaces with label "prometheus" set to "somelabel"
     # scrapeConfigNamespaceSelector:
     #   matchLabels:
@@ -3784,7 +3798,7 @@ prometheus:
     ## Prefix used to register routes, overriding externalUrl route.
     ## Useful for proxies that rewrite URLs.
     ##
-    routePrefix: /
+    routePrefix: /prometheus
 
     ## Standard object's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#metadata
     ## Metadata Labels and Annotations gets propagated to the prometheus pods.
@@ -3855,7 +3869,7 @@ prometheus:
           resources:
             requests:
               storage: 50Gi
-        #selector: {}
+        selector: {}
 
     ## Using tmpfs volume
     ##
@@ -3880,7 +3894,10 @@ prometheus:
     ## The scrape configuration example below will find master nodes, provided they have the name .*mst.*, relabel the
     ## port to 2379 and allow etcd scraping provided it is running on all Kubernetes master nodes
     ##
-    additionalScrapeConfigs:
+    additionalScrapeConfigs: 
+      - job_name: 'aws-cloudwatch'
+        static_configs:
+          - targets: ['aws-cloudwatch-exporter:9106']
     # - job_name: kube-etcd
     #   kubernetes_sd_configs:
     #     - role: node
@@ -4622,7 +4639,7 @@ thanosRuler:
     ## will be used as value for externalPrefix
     externalPrefixNilUsesHelmValues: true
 
-    ## The route prefix ThanosRuler registers HTTP handlers for. This is useful, if using ExternalURL and a proxy is rewriting HTTP routes of arequest, and the actual ExternalURL is still true,
+    ## The route prefix ThanosRuler registers HTTP handlers for. This is useful, if using ExternalURL and a proxy is rewriting HTTP routes of a request, and the actual ExternalURL is still true,
     ## but the server serves requests under a different route prefix. For example for use with kubectl proxy.
     ##
     routePrefix: /
