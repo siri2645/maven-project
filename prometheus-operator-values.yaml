@@ -1125,8 +1125,8 @@ grafana:
         isDefault: false
         jsonData:
           authType: "assume_role"
-          defaultRegion: ""   
-          assumeRoleArn: "arn:aws:iam::"
+          defaultRegion: "us-west-2"   
+          assumeRoleArn: "arn:aws:iam::123456789012:role/DummyRoleName"
           customMetricsNamespaces: "CustomNamespace"
           # secureJsonData:
         #   accessKey: "YOUR_AWS_ACCESS_KEY"   # Optional, recommended to use IRSA instead
@@ -1134,12 +1134,12 @@ grafana:
       - name: PostgreSQL
         type: postgres
         access: proxy
-        url: ":5432" 
-        database: ""  
-        user: ""          
+        url: "mydatabase-instance.c1234567890.us-east-1.rds.amazonaws.com:5432" 
+        database: "sonardb"  
+        user: "postgres"          
         secureJsonData:
           passwordFromSecret:
-            name:   
+            name: postgres-secret  
             key: password           
         jsonData:
           sslmode: "require"  
