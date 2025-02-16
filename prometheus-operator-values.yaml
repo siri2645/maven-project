@@ -1125,8 +1125,8 @@ grafana:
         isDefault: false
         jsonData:
           authType: "assume_role"
-          defaultRegion: "us-east-1"   
-          assumeRoleArn: "arn:aws:iam::828692096705:role/AWS_CROSS_ACCOUNT_ROLE_SANBOX-3"
+          defaultRegion: ""   
+          assumeRoleArn: "arn:aws:iam::"
           customMetricsNamespaces: "CustomNamespace"
           # secureJsonData:
         #   accessKey: "YOUR_AWS_ACCESS_KEY"   # Optional, recommended to use IRSA instead
@@ -1134,12 +1134,12 @@ grafana:
       - name: PostgreSQL
         type: postgres
         access: proxy
-        url: "database-jfrog.cjbnwic5nluf.us-east-1.rds.amazonaws.com:5432" 
-        database: "jfrogdb"  
-        user: "jfrogdbadmin"          
+        url: ":5432" 
+        database: ""  
+        user: ""          
         secureJsonData:
           passwordFromSecret:
-            name: postgres-secret  
+            name:   
             key: password           
         jsonData:
           sslmode: "require"  
