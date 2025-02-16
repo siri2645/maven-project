@@ -1,6 +1,22 @@
 {
-  "__inputs": [],
-  "__elements": {},
+  "__inputs": [
+    {
+      "name": "DS_CLOUDWATCH",
+      "label": "CloudWatch",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "cloudwatch",
+      "pluginName": "CloudWatch"
+    },
+    {
+      "name": "DS_CLOUDWATCH",
+      "label": "CloudWatch",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "cloudwatch",
+      "pluginName": "CloudWatch"
+    }
+  ],
   "__requires": [
     {
       "type": "datasource",
@@ -12,18 +28,18 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "11.3.1"
+      "version": "6.6.0-pre"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
     },
     {
       "type": "panel",
       "id": "text",
       "name": "Text",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "timeseries",
-      "name": "Time series",
       "version": ""
     }
   ],
@@ -31,10 +47,7 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": {
-          "type": "datasource",
-          "uid": "grafana"
-        },
+        "datasource": "-- Grafana --",
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -44,1088 +57,960 @@
     ]
   },
   "description": "Visualize AWS Lambda metrics",
-  "editable": false,
-  "fiscalYearStartMonth": 0,
+  "editable": true,
+  "gnetId": 11267,
   "graphTooltip": 0,
   "id": null,
+  "iteration": 1574322239729,
   "links": [],
   "panels": [
     {
-      "datasource": {
-        "uid": "$datasource"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "bars",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "ms"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Maximum"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#e24d42",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Duration Maximum"
-            },
-            "properties": [
-              {
-                "id": "custom.drawStyle",
-                "value": "line"
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 0
-              },
-              {
-                "id": "custom.drawStyle",
-                "value": "line"
-              },
-              {
-                "id": "custom.axisPlacement",
-                "value": "right"
-              }
-            ]
-          }
-        ]
-      },
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$datasource",
+      "fill": 0,
+      "fillGradient": 0,
       "gridPos": {
         "h": 7,
         "w": 24,
         "x": 0,
         "y": 0
       },
-      "id": 1,
-      "options": {
-        "dataLinks": [],
-        "legend": {
-          "calcs": [
-            "mean",
-            "max",
-            "min"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": false,
+        "total": false,
+        "values": false
       },
-      "pluginVersion": "11.3.1",
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
       "targets": [
         {
-          "alias": "{{metric}} {{stat}}",
-          "application": {
-            "filter": ""
-          },
-          "datasource": {
-            "type": "cloudwatch",
-            "uid": "$datasource"
-          },
+          "alias": "",
           "dimensions": {
-            "FunctionName": "$functionname"
+            "FunctionName": "*"
           },
-          "expression": "",
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "highResolution": false,
-          "host": {
-            "filter": ""
-          },
+          "expression": "REMOVE_EMPTY(SEARCH('{AWS/Lambda} MetricName=\"Invocations\"', 'Sum', $period))/$period",
           "id": "",
-          "item": {
-            "filter": ""
-          },
-          "label": "${PROP('MetricName')} ${PROP('Stat')}",
-          "metricEditorMode": 0,
-          "metricName": "Duration",
-          "metricQueryType": 0,
-          "mode": 0,
+          "matchExact": true,
+          "metricName": "Invocations",
           "namespace": "AWS/Lambda",
-          "options": {
-            "showDisabledItems": false
-          },
-          "period": "$agg",
+          "period": "$period",
           "refId": "A",
           "region": "$region",
-          "returnData": false,
-          "statistic": "Average"
-        },
-        {
-          "alias": "{{metric}} {{stat}}",
-          "application": {
-            "filter": ""
-          },
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "dimensions": {
-            "FunctionName": "$functionname"
-          },
-          "expression": "",
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "hide": false,
-          "highResolution": false,
-          "host": {
-            "filter": ""
-          },
-          "id": "",
-          "item": {
-            "filter": ""
-          },
-          "label": "${PROP('MetricName')} ${PROP('Stat')}",
-          "metricEditorMode": 0,
-          "metricName": "Duration",
-          "metricQueryType": 0,
-          "mode": 0,
-          "namespace": "AWS/Lambda",
-          "options": {
-            "showDisabledItems": false
-          },
-          "period": "$agg",
-          "refId": "B",
-          "region": "$region",
-          "returnData": false,
-          "statistic": "Maximum"
+          "statistics": [
+            "Sum"
+          ]
         }
       ],
-      "title": "Duration",
-      "type": "timeseries"
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Total invocations [count/sec]",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
-      "datasource": {
-        "type": "cloudwatch",
-        "uid": "$datasource"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "bars",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$datasource",
+      "fill": 0,
+      "fillGradient": 0,
       "gridPos": {
         "h": 7,
         "w": 24,
         "x": 0,
         "y": 7
       },
-      "id": 7,
-      "options": {
-        "dataLinks": [],
-        "legend": {
-          "calcs": [
-            "mean",
-            "max",
-            "min",
-            "sum"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
+      "hiddenSeries": false,
+      "id": 15,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": false,
+        "total": false,
+        "values": false
       },
-      "pluginVersion": "11.3.1",
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null as zero",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": true,
       "targets": [
         {
-          "alias": "{{metric}} {{stat}}",
-          "application": {
-            "filter": ""
-          },
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "dimensions": {
-            "FunctionName": "$functionname"
-          },
+          "alias": "",
+          "dimensions": {},
           "expression": "",
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "highResolution": false,
-          "host": {
-            "filter": ""
-          },
-          "id": "",
-          "item": {
-            "filter": ""
-          },
-          "label": "${PROP('MetricName')} ${PROP('Stat')}",
-          "metricEditorMode": 0,
-          "metricName": "Invocations",
-          "metricQueryType": 0,
-          "mode": 0,
+          "hide": true,
+          "id": "errors",
+          "matchExact": true,
+          "metricName": "Errors",
           "namespace": "AWS/Lambda",
-          "options": {
-            "showDisabledItems": false
-          },
-          "period": "$agg",
+          "period": "$period",
           "refId": "A",
           "region": "$region",
-          "returnData": false,
-          "statistic": "Sum"
+          "statistics": [
+            "Sum"
+          ]
+        },
+        {
+          "alias": "",
+          "dimensions": {},
+          "expression": "",
+          "hide": true,
+          "id": "invocations",
+          "matchExact": true,
+          "metricName": "Invocations",
+          "namespace": "AWS/Lambda",
+          "period": "$period",
+          "refId": "B",
+          "region": "$region",
+          "statistics": [
+            "Sum"
+          ]
+        },
+        {
+          "alias": "",
+          "dimensions": {},
+          "expression": "errors / invocations",
+          "id": "",
+          "matchExact": true,
+          "metricName": "Invocations",
+          "namespace": "AWS/Lambda",
+          "period": "$period",
+          "refId": "C",
+          "region": "$region",
+          "statistics": [
+            "Sum"
+          ]
         }
       ],
-      "title": "Invocations",
-      "type": "timeseries"
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Total error rate [errors/invocations]",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
-      "datasource": {
-        "type": "cloudwatch",
-        "uid": "$datasource"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "bars",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Errors Sum"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#e24d42",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Errors_Average"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#BF1B00",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Errors_Sum"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#BF1B00",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
-      },
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$datasource",
+      "fill": 0,
+      "fillGradient": 0,
       "gridPos": {
         "h": 7,
         "w": 24,
         "x": 0,
         "y": 14
       },
-      "id": 8,
-      "options": {
-        "dataLinks": [],
-        "legend": {
-          "calcs": [
-            "mean",
-            "max",
-            "min",
-            "sum"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
+      "hiddenSeries": false,
+      "id": 16,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": false,
+        "total": false,
+        "values": false
       },
-      "pluginVersion": "11.3.1",
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null as zero",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": true,
       "targets": [
         {
-          "alias": "{{metric}} {{stat}}",
-          "application": {
-            "filter": ""
-          },
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "dimensions": {
-            "FunctionName": "$functionname"
-          },
+          "alias": "",
+          "dimensions": {},
           "expression": "",
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "highResolution": false,
-          "host": {
-            "filter": ""
-          },
-          "id": "",
-          "item": {
-            "filter": ""
-          },
-          "label": "${PROP('MetricName')} ${PROP('Stat')}",
-          "metricEditorMode": 0,
-          "metricName": "Errors",
-          "metricQueryType": 0,
-          "mode": 0,
+          "hide": true,
+          "id": "throttles",
+          "matchExact": true,
+          "metricName": "Throttles",
           "namespace": "AWS/Lambda",
-          "options": {
-            "showDisabledItems": false
-          },
-          "period": "$agg",
+          "period": "$period",
           "refId": "A",
           "region": "$region",
-          "returnData": false,
-          "statistic": "Sum"
+          "statistics": [
+            "Sum"
+          ]
+        },
+        {
+          "alias": "",
+          "dimensions": {},
+          "expression": "",
+          "hide": true,
+          "id": "invocations",
+          "matchExact": true,
+          "metricName": "Invocations",
+          "namespace": "AWS/Lambda",
+          "period": "$period",
+          "refId": "B",
+          "region": "$region",
+          "statistics": [
+            "Sum"
+          ]
+        },
+        {
+          "alias": "",
+          "dimensions": {},
+          "expression": "throttles / invocations",
+          "id": "",
+          "matchExact": true,
+          "metricName": "Invocations",
+          "namespace": "AWS/Lambda",
+          "period": "$period",
+          "refId": "C",
+          "region": "$region",
+          "statistics": [
+            "Sum"
+          ]
         }
       ],
-      "title": "Errors",
-      "type": "timeseries"
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Total throttle rate [throttles/invocations]",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
-      "datasource": {
-        "type": "cloudwatch",
-        "uid": "$datasource"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "bars",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Throttles Sum"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#e24d42",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Dead Letter Error Sum"
-            },
-            "properties": [
-              {
-                "id": "custom.axisPlacement",
-                "value": "right"
-              }
-            ]
-          }
-        ]
-      },
+      "collapsed": true,
+      "datasource": "$datasource",
       "gridPos": {
-        "h": 7,
+        "h": 1,
         "w": 24,
         "x": 0,
         "y": 21
       },
       "id": 9,
-      "options": {
-        "dataLinks": [],
-        "legend": {
-          "calcs": [
-            "mean",
-            "max",
-            "min",
-            "sum"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "11.3.1",
-      "targets": [
+      "panels": [
         {
-          "alias": "{{metric}} {{stat}}",
-          "application": {
-            "filter": ""
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "$datasource",
+          "fill": 0,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 9,
+            "w": 24,
+            "x": 0,
+            "y": 1
           },
-          "datasource": {
-            "uid": "$datasource"
+          "hiddenSeries": false,
+          "id": 11,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "max",
+            "sortDesc": true,
+            "total": false,
+            "values": true
           },
-          "dimensions": {
-            "FunctionName": "$functionname"
-          },
-          "expression": "",
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "highResolution": false,
-          "host": {
-            "filter": ""
-          },
-          "id": "",
-          "item": {
-            "filter": ""
-          },
-          "label": "${PROP('MetricName')} ${PROP('Stat')}",
-          "metricEditorMode": 0,
-          "metricName": "Throttles",
-          "metricQueryType": 0,
-          "mode": 0,
-          "namespace": "AWS/Lambda",
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
           "options": {
-            "showDisabledItems": false
+            "dataLinks": []
           },
-          "period": "$agg",
-          "refId": "A",
-          "region": "$region",
-          "returnData": false,
-          "statistic": "Sum"
-        },
-        {
-          "alias": "{{metric}} {{stat}}",
-          "application": {
-            "filter": ""
-          },
-          "datasource": {
-            "type": "cloudwatch",
-            "uid": "$datasource"
-          },
-          "dimensions": {
-            "FunctionName": "$functionname"
-          },
-          "expression": "",
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "highResolution": false,
-          "host": {
-            "filter": ""
-          },
-          "id": "",
-          "item": {
-            "filter": ""
-          },
-          "label": "${PROP('MetricName')} ${PROP('Stat')}",
-          "metricEditorMode": 0,
-          "metricName": "Dead Letter Error",
-          "metricQueryType": 0,
-          "mode": 0,
-          "namespace": "AWS/Lambda",
-          "options": {
-            "showDisabledItems": false
-          },
-          "period": "$agg",
-          "refId": "B",
-          "region": "$region",
-          "returnData": false,
-          "statistic": "Sum"
-        }
-      ],
-      "title": "Throttles",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "uid": "$datasource"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
+          "percentage": false,
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "",
+              "dimensions": {
+                "FunctionName": "*"
               },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Throttles_Average"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#EAB839",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "UnreservedConcurrentExecutions Average"
-            },
-            "properties": [
-              {
-                "id": "custom.axisPlacement",
-                "value": "right"
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 28
-      },
-      "id": 10,
-      "options": {
-        "dataLinks": [],
-        "legend": {
-          "calcs": [
-            "mean",
-            "max",
-            "min"
+              "expression": "REMOVE_EMPTY(SEARCH('{AWS/Lambda,FunctionName} MetricName=\"Duration\"', 'Average', $period))",
+              "id": "",
+              "matchExact": true,
+              "metricName": "Invocations",
+              "namespace": "AWS/Lambda",
+              "period": "$period",
+              "refId": "A",
+              "region": "$region",
+              "statistics": [
+                "Sum"
+              ]
+            }
           ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "11.3.1",
-      "targets": [
-        {
-          "alias": "{{metric}} {{stat}}",
-          "application": {
-            "filter": ""
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Duration per function [average time]  Log scale",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
           },
-          "datasource": {
-            "type": "cloudwatch",
-            "uid": "$datasource"
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
-          "dimensions": {},
-          "expression": "",
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "highResolution": false,
-          "host": {
-            "filter": ""
-          },
-          "id": "",
-          "item": {
-            "filter": ""
-          },
-          "label": "${PROP('MetricName')} ${PROP('Stat')}",
-          "metricEditorMode": 0,
-          "metricName": "ConcurrentExecutions",
-          "metricQueryType": 0,
-          "mode": 0,
-          "namespace": "AWS/Lambda",
-          "options": {
-            "showDisabledItems": false
-          },
-          "period": "$agg",
-          "refId": "A",
-          "region": "$region",
-          "returnData": false,
-          "statistic": "Average"
+          "yaxes": [
+            {
+              "format": "ms",
+              "label": null,
+              "logBase": 10,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         },
         {
-          "alias": "{{metric}} {{stat}}",
-          "application": {
-            "filter": ""
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "$datasource",
+          "fill": 0,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 9,
+            "w": 24,
+            "x": 0,
+            "y": 10
           },
-          "datasource": {
-            "uid": "$datasource"
+          "hiddenSeries": false,
+          "id": 6,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "max",
+            "sortDesc": true,
+            "total": false,
+            "values": true
           },
-          "dimensions": {},
-          "expression": "",
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "highResolution": false,
-          "host": {
-            "filter": ""
-          },
-          "id": "",
-          "item": {
-            "filter": ""
-          },
-          "label": "${PROP('MetricName')} ${PROP('Stat')}",
-          "metricEditorMode": 0,
-          "metricName": "UnreservedConcurrentExecutions",
-          "metricQueryType": 0,
-          "mode": 0,
-          "namespace": "AWS/Lambda",
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
           "options": {
-            "showDisabledItems": false
+            "dataLinks": []
           },
-          "period": "$agg",
-          "refId": "B",
-          "region": "$region",
-          "returnData": false,
-          "statistic": "Average"
+          "percentage": false,
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "",
+              "dimensions": {
+                "FunctionName": "*"
+              },
+              "expression": "REMOVE_EMPTY(SEARCH('{AWS/Lambda,FunctionName} MetricName=\"Invocations\"', 'Sum', $period))/$period",
+              "id": "",
+              "matchExact": true,
+              "metricName": "Invocations",
+              "namespace": "AWS/Lambda",
+              "period": "$period",
+              "refId": "A",
+              "region": "$region",
+              "statistics": [
+                "Sum"
+              ]
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Invocations per function [count/sec]",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "$datasource",
+          "fill": 0,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 9,
+            "w": 24,
+            "x": 0,
+            "y": 19
+          },
+          "hiddenSeries": false,
+          "id": 12,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "max",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "",
+              "dimensions": {
+                "FunctionName": "*"
+              },
+              "expression": "REMOVE_EMPTY(SEARCH('{AWS/Lambda,FunctionName} MetricName=\"Errors\"', 'Sum', $period))/$period",
+              "id": "",
+              "matchExact": true,
+              "metricName": "Invocations",
+              "namespace": "AWS/Lambda",
+              "period": "$period",
+              "refId": "A",
+              "region": "$region",
+              "statistics": [
+                "Sum"
+              ]
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Errors per function [count/sec]",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "$datasource",
+          "fill": 0,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 9,
+            "w": 24,
+            "x": 0,
+            "y": 28
+          },
+          "hiddenSeries": false,
+          "id": 13,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "max",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "",
+              "dimensions": {
+                "FunctionName": "*"
+              },
+              "expression": "REMOVE_EMPTY(SEARCH('{AWS/Lambda,FunctionName} MetricName=\"Throttles\"', 'Sum', $period))/$period",
+              "id": "",
+              "matchExact": true,
+              "metricName": "Invocations",
+              "namespace": "AWS/Lambda",
+              "period": "$period",
+              "refId": "A",
+              "region": "$region",
+              "statistics": [
+                "Sum"
+              ]
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Throttles per function [count/sec]",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
-      "title": "Global Concurrent Executions",
-      "type": "timeseries"
+      "title": "Per function details",
+      "type": "row"
     },
     {
+      "collapsed": false,
+      "datasource": "$datasource",
       "gridPos": {
-        "h": 3,
+        "h": 1,
         "w": 24,
         "x": 0,
-        "y": 35
+        "y": 22
       },
-      "id": 2,
-      "options": {
-        "code": {
-          "language": "plaintext",
-          "showLineNumbers": false,
-          "showMiniMap": false
-        },
-        "content": "<a target=\"_blank\" href=\"http://www.monitoringartist.com\" title=\"Dashboard maintained by Monitoring Artist - DevOps / Docker / Kubernetes / AWS ECS / Google GCP / Zabbix / Zenoss / Terraform / Monitoring\"><img src=\"https://monitoringartist.github.io/monitoring-artist-logo-grafana.png\" height=\"30px\" /></a> | \n<a target=\"_blank\" href=\"https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics.html\">AWS CloudWatch Lambda documentation</a> | \n<a target=\"_blank\" href=\"https://grafana.com/dashboards/593\">Installed from Grafana.com dashboards</a>",
-        "mode": "html"
+      "id": 20,
+      "panels": [],
+      "title": "Information",
+      "type": "row"
+    },
+    {
+      "content": "For more information about the available metrics for AWS Lambda, visit the [AWS Lambda documentation](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions-metrics.html).",
+      "datasource": "$datasource",
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 23
       },
-      "pluginVersion": "11.3.1",
-      "title": "Documentation",
+      "id": 18,
+      "mode": "markdown",
+      "options": {},
+      "targets": [
+        {
+          "alias": "",
+          "dimensions": {},
+          "expression": "",
+          "id": "",
+          "matchExact": true,
+          "metricName": "",
+          "namespace": "",
+          "refId": "A",
+          "region": "default",
+          "statistics": [
+            "Average"
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": " ",
       "type": "text"
     }
   ],
   "refresh": false,
-  "schemaVersion": 40,
+  "schemaVersion": 21,
+  "style": "dark",
   "tags": [
-    "monitoringartist",
-    "cloudwatch"
+    "Amazon",
+    "AWS",
+    "CloudWatch",
+    "Lambda"
   ],
   "templating": {
     "list": [
       {
-        "current": {},
+        "current": {
+          "text": "default",
+          "value": "default"
+        },
+        "hide": 0,
         "includeAll": false,
-        "label": "Datasource",
+        "label": "Data source",
+        "multi": false,
         "name": "datasource",
         "options": [],
         "query": "cloudwatch",
         "refresh": 1,
         "regex": "",
+        "skipUrlSync": false,
         "type": "datasource"
       },
       {
-        "auto": true,
-        "auto_count": 50,
-        "auto_min": "10s",
+        "allValue": null,
         "current": {
-          "text": "$__auto",
-          "value": "$__auto"
+          "text": "default",
+          "value": "default"
         },
-        "label": "Aggregation",
-        "name": "agg",
-        "options": [
-          {
-            "selected": false,
-            "text": "1s",
-            "value": "1s"
-          },
-          {
-            "selected": false,
-            "text": "5s",
-            "value": "5s"
-          },
-          {
-            "selected": false,
-            "text": "10s",
-            "value": "10s"
-          },
-          {
-            "selected": false,
-            "text": "30s",
-            "value": "30s"
-          },
-          {
-            "selected": false,
-            "text": "1m",
-            "value": "1m"
-          },
-          {
-            "selected": false,
-            "text": "5m",
-            "value": "5m"
-          },
-          {
-            "selected": false,
-            "text": "15m",
-            "value": "15m"
-          },
-          {
-            "selected": false,
-            "text": "1h",
-            "value": "1h"
-          },
-          {
-            "selected": false,
-            "text": "6h",
-            "value": "6h"
-          },
-          {
-            "selected": false,
-            "text": "1d",
-            "value": "1d"
-          },
-          {
-            "selected": false,
-            "text": "7d",
-            "value": "7d"
-          },
-          {
-            "selected": false,
-            "text": "30d",
-            "value": "30d"
-          }
-        ],
-        "query": "1s,5s,10s,30s,1m,5m,15m,1h,6h,1d,7d,30d",
-        "refresh": 2,
-        "type": "interval"
-      },
-      {
-        "current": {},
-        "datasource": {
-          "type": "cloudwatch",
-          "uid": "$datasource"
-        },
+        "datasource": "$datasource",
         "definition": "regions()",
+        "hide": 0,
         "includeAll": false,
         "label": "Region",
+        "multi": false,
         "name": "region",
         "options": [],
         "query": "regions()",
         "refresh": 1,
         "regex": "",
-        "type": "query"
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       },
       {
-        "current": {},
-        "datasource": {
-          "type": "cloudwatch",
-          "uid": "$datasource"
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "tags": [],
+          "text": "300",
+          "value": "300"
         },
-        "definition": "dimension_values($region,AWS/Lambda,Duration,FunctionName)",
+        "hide": 0,
         "includeAll": false,
-        "label": "FunctionName",
-        "name": "functionname",
-        "options": [],
-        "query": "dimension_values($region,AWS/Lambda,Duration,FunctionName)",
-        "refresh": 1,
-        "regex": "",
-        "sort": 1,
-        "type": "query"
+        "label": "Period [sec]",
+        "multi": false,
+        "name": "period",
+        "options": [
+          {
+            "selected": false,
+            "text": "60",
+            "value": "60"
+          },
+          {
+            "selected": true,
+            "text": "300",
+            "value": "300"
+          },
+          {
+            "selected": false,
+            "text": "3600",
+            "value": "3600"
+          }
+        ],
+        "query": "60,300,3600",
+        "skipUrlSync": false,
+        "type": "custom"
       }
     ]
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-6h",
     "to": "now"
   },
-  "timepicker": {},
-  "timezone": "browser",
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "",
   "title": "AWS Lambda",
-  "uid": "AWSLambda",
-  "version": 12,
-  "weekStart": "",
-  "gnetId": 593
+  "uid": "iUna6IxZz",
+  "version": 1
 }
