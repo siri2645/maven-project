@@ -820,7 +820,7 @@ artifactory:
     ## azure-blob-storage-direct
     ## azure-blob-storage-v2-direct (Recommended for Azure Blob Storage)
     ## cluster-azure-blob-storage
-    type: file-system
+    type: aws-s3-v3
     ## Use binarystoreXml to provide a custom binarystore.xml
     ## This is intentionally commented and below previous content of binarystoreXml is moved under files/binarystore.xml
     ## binarystoreXml:
@@ -840,7 +840,7 @@ artifactory:
     ## For artifactory.persistence.type file-system
     fileSystem:
       cache:
-        enabled: false
+        enabled: true
     ## For artifactory.persistence.type google-storage, google-storage-v2, google-storage-v2-direct, cluster-google-storage-v2
     googleStorage:
       ## When using GCP buckets as your binary store
@@ -876,13 +876,13 @@ artifactory:
       # signedUrlExpirySeconds: 30
     ## For artifactory.persistence.type aws-s3-v3, s3-storage-v3-direct, cluster-s3-storage-v3, s3-storage-v3-archive
     awsS3V3:
-      testConnection: false
+      testConnection: true
       identity:
       credential:
-      region:
-      bucketName: artifactory-aws
-      path: artifactory/filestore
-      endpoint:
+      region: us-west-2
+      bucketName: s3-bucket-jfrog-test
+      path: jfrog/filestore
+      endpoint: s3.us-west-2.amazonaws.com
       port:
       useHttp:
       maxConnections: 50
