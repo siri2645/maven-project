@@ -11,3 +11,5 @@ parameters:
 provisioner: kubernetes.io/aws-ebs
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
+
+https://jfrog.com/help/r/jfrog-installation-setup-documentation/install-artifactory-single-node-with-helm-charts
