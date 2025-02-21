@@ -13,3 +13,9 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 
 https://jfrog.com/help/r/jfrog-installation-setup-documentation/install-artifactory-single-node-with-helm-charts
+
+psql -h  -p 5432 -U  -d 
+
+ALTER DATABASE  OWNER TO ;
+GRANT ALL PRIVILEGES ON DATABASE  TO ;
+
