@@ -19,3 +19,5 @@ psql -h <endpoint> -p 5432 -U <username> -d <dbname>
 ALTER DATABASE jfrogdb OWNER TO postgres ;
 GRANT ALL PRIVILEGES ON DATABASE jfrogdb TO postgres;
 
+
+https://jfrog.com/start-free/?utm_source=google&utm_medium=cpc&utm_campaign=Search%7CDSK%7CBrand%7CIN%7C202308&utm_term=jfrog%20cloud&gads_network=g&cq_plac=&cq_plt=gp&utm_content=u-bin&gads_campaign_id=20437321111&gads_adgroup_id=157827667091&gads_extension_id=&gads_target_id=aud-1393646485438:kwd-1598615737632&gads_matchtype=b&gad_source=1&gclid=CjwKCAjwtNi0BhA1EiwAWZaANAqDR11vabuNgW6GNPEyG2b7GhBzOVx9d-5ieKhNGInWf7Sr4j0c8BoCrIsQAvD_BwE#trialOptions
